@@ -14,26 +14,32 @@ SPEAKER_PIN = 16
 # create a Pulse Width Modulation Object on this pin
 speaker = machine.PWM(machine.Pin(SPEAKER_PIN))
 
+# Define note frequencies
+tones = {
+    "C4": 262, "D4": 294, "E4": 330, "F4": 349, "G4": 392, "A4": 440, "B4": 494
+}
 
-def playtone(frequency: float, duration: float) -> None:
-    speaker.duty_u16(1000)
+twinkle_twinkle = [
+    "C4", "C4", "G4", "G4", "A4", "A4", "G4",
+    "F4", "F4", "E4", "E4", "D4", "D4", "C4",
+    "G4", "G4", "F4", "F4", "E4", "E4", "D4",
+    "G4", "G4", "F4", "F4", "E4", "E4", "D4",
+    "C4", "C4", "G4", "G4", "A4", "A4", "G4",
+    "F4", "F4", "E4", "E4", "D4", "D4", "C4"
+]
+
+def playtone(frequency):
+    speaker.duty_u16(50000)
     speaker.freq(frequency)
-    utime.sleep(duration)
 
-
-def quiet():
+def bequiet():
     speaker.duty_u16(0)
 
+def playsong(mysong):
+    for note in mysong:
+        playtone(tones[note])
+        utime.sleep(0.5)
+    bequiet()
 
-freq: float = 30
-duration: float = 0.1  # seconds
+playsong(twinkle_twinkle)
 
-print("Playing frequency (Hz):")
-
-for i in range(64):
-    print(freq)
-    playtone(freq, duration)
-    freq = int(freq * 1.1)
-
-# Turn off the PWM
-quiet()

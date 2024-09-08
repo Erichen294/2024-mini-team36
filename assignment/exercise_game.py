@@ -8,7 +8,7 @@ import random
 import json
 
 
-N: int = 3
+N: int = 10
 sample_ms = 10.0
 on_ms = 500
 
@@ -73,7 +73,7 @@ def scorer(t: list[int | None]) -> None:
 
 if __name__ == "__main__":
     # using "if __name__" allows us to reuse functions in other script files
-
+    # Edit the exercise_game.py code to compute average, minimum, maximum response time for 10 flashes total.
     led = Pin("LED", Pin.OUT)
     button = Pin(16, Pin.IN, Pin.PULL_UP)
 
@@ -97,6 +97,18 @@ if __name__ == "__main__":
 
         led.low()
 
+    total = 0
+    for element in t:
+        if element:
+            total += element
+    avg = total / N
+    minimum = min(t)
+    maximum = max(t)
+    print("Average:" + str(avg))
+    print("Minimum:" + str(minimum))
+    print("Maximum:" + str(maximum))
+    
     blinker(5, led)
 
     scorer(t)
+

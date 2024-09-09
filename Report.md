@@ -9,3 +9,6 @@ Exercise 02
 
 Exercise 03
     1. I changed N = 10 for 10 trials and after all of them were done I calculated average by summing all the times and dividing by 10, used min function to find the minimum, and used max function to find the maximum. 
+
+    2. Here is an example of the cloud service storing the score, average, minimum, and maximum of one run. Note: The last point of each graph is the trial run in question. The other points were testing.
+    
